@@ -1,0 +1,21 @@
+
+<div>
+  <input type="text" placeholder="What's is to do?" [(ngModel)]="newTaskText">
+
+  <button type="submit" (click)="addTask()">Add task</button>
+</div>
+
+<div>
+  <p>
+    @for(task of filteredTodos(); track task.id) {
+      <p>{{task.text}}</p>
+    }
+  </p>
+
+  <div><p>Filters</p>
+    <button (click)="tasksListService.changeFilter('all')"><p>All</p></button>
+    <button (click)="tasksListService.changeFilter('completed')"><p>Completed</p></button>
+    <button (click)="tasksListService.changeFilter('active')"><p>Incompleted</p></button>
+  </div>
+
+</div>
