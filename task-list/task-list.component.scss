@@ -1,4 +1,286 @@
-.completed {
-  text-decoration: line-through;
-  color: #333;
+// Task List Component - BEM Convention
+.task-list {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  min-height: 100vh;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+    padding: 32px 24px;
+    background: rgba(255, 255, 255, 0.08);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  &__header-icon {
+    font-size: 36px;
+    height: 36px;
+    width: 36px;
+    color: #667eea;
+    margin-right: 16px;
+    filter: drop-shadow(0 2px 4px rgba(102, 126, 234, 0.3));
+  }
+
+  &__header-title {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 0.5px;
+  }
+
+  &__add-section {
+    margin-bottom: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  &__add-form {
+    display: flex;
+    gap: 20px;
+    align-items: flex-end;
+    padding: 24px;
+    flex-wrap: nowrap;
+  }
+
+  &__input-wrapper {
+    flex: 1;
+  }
+
+  /* Material input – jasny tekst na ciemnym tle poprzez CSS vars */
+  .mat-mdc-form-field {
+    --mdc-filled-text-field-caret-color: #ffffff;
+    --mdc-filled-text-field-input-text-color: #ffffff;
+    --mdc-filled-text-field-label-text-color: rgba(255, 255, 255, 0.8);
+    --mdc-outlined-text-field-caret-color: #ffffff;
+    --mdc-outlined-text-field-input-text-color: #ffffff;
+    --mdc-outlined-text-field-label-text-color: rgba(255, 255, 255, 0.8);
+    --mdc-outlined-text-field-outline-color: rgba(255, 255, 255, 0.3);
+    --mdc-outlined-text-field-hover-outline-color: rgba(255, 255, 255, 0.5);
+    --mdc-outlined-text-field-focus-outline-color: #64b5f6;
+  }
+
+  &__add-button {
+    height: 56px;
+    padding: 0 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    min-width: 160px;
+  }
+
+  &__filters-section {
+    margin-bottom: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  &__filters {
+    padding: 28px;
+  }
+
+  &__filters-title {
+    margin: 0 0 20px 0;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1.1em;
+  }
+
+  &__filter-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  &__filter-button {
+    border-radius: 28px;
+    padding: 14px 24px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    font-weight: 600;
+    cursor: pointer;
+
+    &--active {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      box-shadow: 0 6px 18px rgba(102, 126, 234, 0.35);
+      border: 1px solid transparent;
+    }
+
+    &:hover:not(&--active) {
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    }
+  }
+
+  /* Filtry – biały tekst i ikony */
+  &__filter-button {
+    color: #ffffff;
+  }
+
+  &__filter-icon {
+    color: #ffffff;
+  }
+
+  &__tasks-section {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  &__tasks-container {
+    padding: 24px;
+  }
+
+  &__empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  &__empty-icon {
+    font-size: 64px;
+    height: 64px;
+    width: 64px;
+    margin-bottom: 20px;
+    opacity: 0.4;
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  &__empty-text {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  &__task-item {
+    display: flex;
+    align-items: center;
+    padding: 16px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    background: rgba(255, 255, 255, 0.02);
+
+    &:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateX(4px);
+    }
+
+    &--completed {
+      opacity: 0.6;
+    }
+  }
+
+  /* Checkbox – kolory przez CSS vars MDC */
+  .mat-mdc-checkbox {
+    --mdc-checkbox-selected-icon-color: #ffffff;
+    --mdc-checkbox-selected-checkmark-color: #0f3460;
+    /* kontrastowy check na białym tle */
+    --mdc-checkbox-unselected-icon-color: rgba(255, 255, 255, 0.7);
+    --mdc-checkbox-selected-focus-icon-color: #ffffff;
+    --mdc-checkbox-selected-hover-icon-color: #ffffff;
+    --mdc-checkbox-selected-pressed-icon-color: #ffffff;
+    --mdc-checkbox-unselected-focus-icon-color: rgba(255, 255, 255, 0.9);
+    --mdc-checkbox-unselected-hover-icon-color: rgba(255, 255, 255, 0.9);
+    --mdc-checkbox-unselected-pressed-icon-color: rgba(255, 255, 255, 0.9);
+  }
+
+  &__task-text {
+    flex: 1;
+    font-size: 16px;
+    line-height: 1.6;
+    transition: all 0.3s ease;
+    color: #ffffff;
+    font-weight: 500;
+
+    &--completed {
+      text-decoration: line-through;
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .task-list {
+    padding: 20px 15px;
+
+    &__header {
+      margin-bottom: 30px;
+      padding: 24px 20px;
+    }
+
+    &__header-icon {
+      font-size: 28px;
+      height: 28px;
+      width: 28px;
+      margin-right: 12px;
+    }
+
+    &__header-title {
+      font-size: 1.5rem;
+    }
+
+    &__add-form {
+      grid-template-columns: 1fr;
+      row-gap: 16px;
+      align-items: stretch;
+    }
+
+    &__add-button {
+      height: 52px;
+      margin-top: 0;
+    }
+
+    &__filter-buttons {
+      justify-content: center;
+      gap: 8px;
+    }
+
+    &__filter-button {
+      padding: 10px 16px;
+      font-size: 14px;
+    }
+
+    &__task-item {
+      padding: 14px 10px;
+    }
+
+    &__task-text {
+      font-size: 15px;
+    }
+  }
 }

@@ -1,1 +1,42 @@
-/* You can add global styles to this file, and also import other style files */
+/* Angular Material Theme */
+@import '@angular/material/prebuilt-themes/pink-bluegrey.css';
+
+/* Global styles - Dark Theme Background */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+    font-family: 'Roboto', "Helvetica Neue", sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: #ffffff;
+    min-height: 100vh;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+// Scrollbar styling for dark theme
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.3);
+    }
+}
