@@ -1,0 +1,5 @@
+<mat-form-field appearance="outline" subscriptSizing="dynamic" class="task-list__input-wrapper">
+  <mat-label>{{label()}}</mat-label>
+  <input title="task-form-input" matInput [placeholder]="placeholder()" [(ngModel)]="taskText">
+  <mat-icon matSuffix>edit</mat-icon>
+</mat-form-field>

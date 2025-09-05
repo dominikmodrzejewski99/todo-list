@@ -1,12 +1,12 @@
-import {computed, Injectable, signal, WritableSignal} from '@angular/core';
+import { computed, Injectable, signal, WritableSignal } from '@angular/core';
 
-interface Task {
+export interface Task {
   id: number,
   text: string,
   isCompleted: boolean,
 }
 
-type FilterType = 'all' | 'active' | 'completed';
+export type FilterType = 'all' | 'active' | 'completed';
 
 @Injectable({
   providedIn: 'root'
@@ -20,13 +20,13 @@ export class TasksListService {
   }])
 
   newTaskText = signal('');
-  filter = signal('all');
+  filter = signal<FilterType>('all');
 
   filteredTodos = computed(() => {
     const currentFilter = this.filter();
     const currentTasksList = this.todosList();
 
-    if(currentFilter === 'all') {
+    if (currentFilter === 'all') {
       return currentTasksList;
     } else if (currentFilter === 'active') {
       return currentTasksList.filter(task => !task.isCompleted)
@@ -53,7 +53,7 @@ export class TasksListService {
     this.todosList.update(tasks => {
       return tasks.map(task => {
         if (task.id === id) {
-          return {...task, isCompleted: !task.isCompleted}
+          return { ...task, isCompleted: !task.isCompleted }
         }
 
         return task;

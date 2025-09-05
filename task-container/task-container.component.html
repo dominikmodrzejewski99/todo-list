@@ -1,0 +1,20 @@
+<div class="task-list">
+  <div class="task-list__header">
+    <mat-icon class="task-list__header-icon">checklist</mat-icon>
+    <h1 class="task-list__header-title">Todo List</h1>
+  </div>
+
+  <mat-card class="task-list__add-section">
+    <div class="task-list__add-form">
+      <app-task-form [(taskText)]="newTaskText"></app-task-form>
+      <button mat-raised-button color="primary" (click)="addTask()" class="task-list__add-button">
+        <mat-icon>add</mat-icon>
+        Add Task
+      </button>
+    </div>
+  </mat-card>
+
+  <app-task-filters [currentFilter]="currentFilter()" (onFilterChange)="onFilterChange($event)"></app-task-filters>
+
+  <app-task-list [filteredTasks]="filteredTodos()" (taskToggled)="onTaskToggle($event)"></app-task-list>
+</div>

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { TaskListComponent } from '../task-list/task-list.component';
+import {TaskContainerComponent} from '../task-container/task-container.component';
 
 @Component({
   selector: 'app-root',
-  imports: [TaskListComponent],
+  imports: [TaskContainerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
