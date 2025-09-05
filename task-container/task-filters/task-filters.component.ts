@@ -1,14 +1,12 @@
-import {Component, input, output} from '@angular/core';
-import {MatCard} from '@angular/material/card';
-import {MatButton} from '@angular/material/button';
-import {MatIcon} from '@angular/material/icon';
-import {FilterType} from '../../models/filter-type';
+import { Component, input, output } from '@angular/core';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { FilterType } from '../../models/filter-type';
 
 @Component({
   selector: 'app-task-filters',
   imports: [
     MatIcon,
-    MatCard,
     MatButton
   ],
   templateUrl: './task-filters.component.html',

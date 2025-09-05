@@ -1,5 +1,4 @@
 import { Component, input, model, output } from '@angular/core';
-import { MatCard } from "@angular/material/card";
 import { MatCheckbox } from "@angular/material/checkbox";
 import { MatIcon } from '@angular/material/icon';
 import { Task } from '../../services/tasks-list.service';
@@ -7,7 +6,6 @@ import { Task } from '../../services/tasks-list.service';
 @Component({
   selector: 'app-task-list',
   imports: [
-    MatCard,
     MatCheckbox,
     MatIcon
   ],

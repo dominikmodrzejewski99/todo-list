@@ -1,21 +1,20 @@
-<mat-card class="task-list__tasks-section">
-  <div class="task-list__tasks-container">
+<div class="task-list">
+  <div class="task-list__container">
     @if (filteredTasks().length === 0) {
-    <div class="task-list__empty-state">
+    <div class="task-list__empty">
       <mat-icon class="task-list__empty-icon">inbox</mat-icon>
       <p class="task-list__empty-text">No tasks to display</p>
     </div>
     } @else {
     @for(task of filteredTasks(); track task.id) {
-    <div class="task-list__task-item" [class.task-list__task-item--completed]="task.isCompleted">
-      <mat-checkbox [checked]="task.isCompleted" (change)="toggleTask(task.id)" class="task-list__task-checkbox">
+    <div class="task-list__item" [class.task-list__item--completed]="task.isCompleted">
+      <mat-checkbox [checked]="task.isCompleted" (change)="toggleTask(task.id)" class="task-list__checkbox">
       </mat-checkbox>
-      <span class="task-list__task-text" [class.task-list__task-text--completed]="task.isCompleted"
-        (click)="toggleTask(task.id)">
+      <span class="task-list__text" [class.task-list__text--completed]="task.isCompleted" (click)="toggleTask(task.id)">
         {{task.text}}
       </span>
     </div>
     }
     }
   </div>
-</mat-card>
+</div>

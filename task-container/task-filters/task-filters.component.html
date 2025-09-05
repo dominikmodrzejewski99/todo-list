@@ -1,22 +1,22 @@
-<mat-card class="task-list__filters-section">
-  <div class="task-list__filters">
-    <h3 class="task-list__filters-title">Filters:</h3>
-    <div class="task-list__filter-buttons">
-      <button mat-button (click)="changeFilter('all')" class="task-list__filter-button"
-        [class.task-list__filter-button--active]="currentFilter() === 'all'">
-        <mat-icon class="task-list__filter-icon">list</mat-icon>
+<div class="task-filters">
+  <div class="task-filters__container">
+    <h3 class="task-filters__title">Filters:</h3>
+    <div class="task-filters__buttons">
+      <button mat-button (click)="changeFilter('all')" class="task-filters__button"
+        [class.task-filters__button--active]="currentFilter() === 'all'">
+        <mat-icon class="task-filters__icon">list</mat-icon>
         All
       </button>
-      <button mat-button (click)="changeFilter('active')" class="task-list__filter-button"
-        [class.task-list__filter-button--active]="currentFilter() === 'active'">
-        <mat-icon class="task-list__filter-icon">radio_button_unchecked</mat-icon>
+      <button mat-button (click)="changeFilter('active')" class="task-filters__button"
+        [class.task-filters__button--active]="currentFilter() === 'active'">
+        <mat-icon class="task-filters__icon">radio_button_unchecked</mat-icon>
         Active
       </button>
-      <button mat-button (click)="changeFilter('completed')" class="task-list__filter-button"
-        [class.task-list__filter-button--active]="currentFilter() === 'completed'">
-        <mat-icon class="task-list__filter-icon">check_circle</mat-icon>
+      <button mat-button (click)="changeFilter('completed')" class="task-filters__button"
+        [class.task-filters__button--active]="currentFilter() === 'completed'">
+        <mat-icon class="task-filters__icon">check_circle</mat-icon>
         Completed
       </button>
     </div>
   </div>
-</mat-card>
+</div>

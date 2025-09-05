@@ -1,0 +1,104 @@
+// Task List Component - BEM Convention
+.task-list {
+    background: rgba(255, 255, 255, 0.05);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+
+    &__container {
+        padding: 24px;
+    }
+
+    &__empty {
+        text-align: center;
+        padding: 60px 20px;
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    &__empty-icon {
+        font-size: 64px;
+        height: 64px;
+        width: 64px;
+        margin-bottom: 20px;
+        opacity: 0.4;
+        color: rgba(255, 255, 255, 0.3);
+    }
+
+    &__empty-text {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        padding: 16px 12px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border-radius: 12px;
+        margin-bottom: 8px;
+        background: rgba(255, 255, 255, 0.02);
+
+        &:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(4px);
+        }
+
+        &--completed {
+            opacity: 0.6;
+        }
+    }
+
+    &__checkbox {
+        margin-right: 1rem;
+
+        // Checkbox styling for dark theme
+        ::ng-deep .mat-mdc-checkbox {
+            --mdc-checkbox-selected-icon-color: #ffffff;
+            --mdc-checkbox-selected-checkmark-color: #0f3460;
+            --mdc-checkbox-unselected-icon-color: rgba(255, 255, 255, 0.7);
+            --mdc-checkbox-selected-focus-icon-color: #ffffff;
+            --mdc-checkbox-selected-hover-icon-color: #ffffff;
+            --mdc-checkbox-selected-pressed-icon-color: #ffffff;
+            --mdc-checkbox-unselected-focus-icon-color: rgba(255, 255, 255, 0.9);
+            --mdc-checkbox-unselected-hover-icon-color: rgba(255, 255, 255, 0.9);
+            --mdc-checkbox-unselected-pressed-icon-color: rgba(255, 255, 255, 0.9);
+        }
+    }
+
+    &__text {
+        flex: 1;
+        font-size: 16px;
+        line-height: 1.6;
+        transition: all 0.3s ease;
+        color: #ffffff;
+        font-weight: 500;
+
+        &--completed {
+            text-decoration: line-through;
+            color: rgba(255, 255, 255, 0.5);
+        }
+    }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+    .task-list {
+        &__item {
+            padding: 14px 10px;
+        }
+
+        &__text {
+            font-size: 15px;
+        }
+    }
+}
