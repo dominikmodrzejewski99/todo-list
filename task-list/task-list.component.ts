@@ -16,8 +16,6 @@ export class TaskListComponent {
 
     newTaskText = this.tasksListService.newTaskText;
     filteredTodos = this.tasksListService.filteredTodos;
-    // changeFilter = this.tasksListService.changeFilter(newFilter)
-
     addTask() {
       this.tasksListService.addTask(this.newTaskText());
 

@@ -8,7 +8,9 @@
 <div>
   <p>
     @for(task of filteredTodos(); track task.id) {
-      <p>{{task.text}}</p>
+      <p>
+       <li (click)="tasksListService.toggleTask(task.id)" [class.completed]="task.isCompleted"> {{task.text}}</li>
+      </p>
     }
   </p>
 

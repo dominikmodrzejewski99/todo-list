@@ -15,7 +15,7 @@ export class TasksListService {
 
   todosList: WritableSignal<Task[]> = signal([{
     id: 1,
-    text: 'Wash dishes',
+    text: 'Example task',
     isCompleted: false
   }])
 
@@ -47,6 +47,18 @@ export class TasksListService {
       text: newTaskText,
       isCompleted: false
     }])
+  }
+
+  toggleTask(id: number) {
+    this.todosList.update(tasks => {
+      return tasks.map(task => {
+        if (task.id === id) {
+          return {...task, isCompleted: !task.isCompleted}
+        }
+
+        return task;
+      });
+    });
   }
 
 
