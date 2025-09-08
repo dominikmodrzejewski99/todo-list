@@ -18,7 +18,7 @@
 
   <app-task-filters [currentFilter]="currentFilter()" (onFilterChange)="onFilterChange($event)"></app-task-filters>
 
-  <app-task-list [filteredTasks]="filteredTodos()" (taskToggled)="onTaskToggle($event)"></app-task-list>
+  <app-task-list [filteredTasks]="filteredTodos()" (taskDeleted)="deleteTask($event)" (taskToggled)="onTaskToggle($event)"></app-task-list>
 
   <app-timer> </app-timer>
 </div>

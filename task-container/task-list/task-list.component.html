@@ -13,6 +13,7 @@
       <span class="task-list__text" [class.task-list__text--completed]="task.isCompleted" (click)="toggleTask(task.id)">
         {{task.text}}
       </span>
+      <button (click)="onDelete(task.id)" mat-icon-button><mat-icon>delete</mat-icon></button>
     </div>
     }
     }

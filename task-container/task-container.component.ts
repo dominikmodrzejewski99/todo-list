@@ -44,6 +44,10 @@ export class TaskContainerComponent {
     }
   }
 
+  deleteTask(taskId: number) {
+    this.tasksListService.deleteTask(taskId);
+  }
+
   onTaskToggle(taskId: number) {
     this.tasksListService.toggleTask(taskId);
   }

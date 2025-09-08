@@ -61,6 +61,24 @@ export class TasksListService {
     });
   }
 
+  deleteTask(id: number) {
+    this.todosList.update(tasks => {
+      return tasks.filter(task => task.id !== id);
+    });
+  }
 
+  editingId = signal<number | null>(null)
+
+  updateTaskText(id: number, newText: string) {
+    this.todosList.update(tasks => {
+      return tasks.map(task => {
+        if (task.id === id) {
+          return { ...task, text: newText }
+        }
+
+        return task;
+      })
+    })
+  }
   constructor() { }
 }
