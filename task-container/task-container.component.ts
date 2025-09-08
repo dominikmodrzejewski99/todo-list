@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { TaskFormComponent } from './task-form/task-form.component';
 import { TaskFiltersComponent } from './task-filters/task-filters.component';
 import { TaskListComponent } from './task-list/task-list.component';
+import {TimerComponent} from './timer/timer.component';
 
 @Component({
   selector: 'app-task-container',
@@ -23,7 +24,8 @@ import { TaskListComponent } from './task-list/task-list.component';
     MatFormFieldModule,
     TaskFormComponent,
     TaskListComponent,
-    TaskFiltersComponent
+    TaskFiltersComponent,
+    TimerComponent
   ],
   templateUrl: './task-container.component.html',
   styleUrl: './task-container.component.scss'
