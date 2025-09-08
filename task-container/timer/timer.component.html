@@ -1,10 +1,28 @@
-<div>
-  <button mat-button (click)="startTimer()">Start</button>
-  <button mat-button (click)="stopTimer()">Stop</button>
-  <button mat-button (click)="resetTimer()">Reset</button>
+<div class="timer">
+  <div class="timer__display">
+    <div class="timer__time">{{formattedTime()}}</div>
+    <div class="timer__status" [class.timer__status--running]="isRunning()">
+      <mat-icon>{{isRunning() ? 'play_circle' : 'pause_circle'}}</mat-icon>
+      <span>{{isRunning() ? 'Running' : 'Stopped'}}</span>
+    </div>
+  </div>
 
-  <h2>
-    {{secondsElapsed() }}
-  </h2>
+  <div class="timer__controls">
+    <button mat-raised-button color="primary" (click)="startTimer()" [disabled]="isRunning()"
+      class="timer__button timer__button--start">
+      <mat-icon>play_arrow</mat-icon>
+      Start
+    </button>
 
+    <button mat-raised-button color="accent" (click)="stopTimer()" [disabled]="!isRunning()"
+      class="timer__button timer__button--stop">
+      <mat-icon>stop</mat-icon>
+      Stop
+    </button>
+
+    <button mat-raised-button (click)="resetTimer()" class="timer__button timer__button--reset">
+      <mat-icon>refresh</mat-icon>
+      Reset
+    </button>
+  </div>
 </div>

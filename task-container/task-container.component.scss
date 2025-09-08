@@ -121,3 +121,18 @@
     }
   }
 }
+
+// Add margin for floating timer on mobile
+@media (max-width: 768px) {
+  .task-container {
+    padding-bottom: 140px; // Extra space for floating timer
+    padding-right: 15px; // Less right padding to avoid timer overlap
+  }
+}
+
+@media (max-width: 480px) {
+  .task-container {
+    padding-bottom: 160px; // More space for stacked timer buttons
+    padding-right: 10px;
+  }
+}
