@@ -58,7 +58,7 @@
   }
 
   &__input-wrapper {
-    flex: 2;
+    flex: 4;
     min-width: 0;
   }
 
@@ -78,13 +78,13 @@
 
   &__add-button {
     height: 56px;
-    padding: 0 20px;
+    padding: 0 24px;
     border-radius: 12px;
     font-weight: 600;
     transition: all 0.3s ease;
     flex-shrink: 0;
-    min-width: 140px;
-    max-width: 140px;
+    min-width: 160px;
+    white-space: nowrap;
   }
 }
 
@@ -115,9 +115,14 @@
       align-items: stretch;
     }
 
+    &__input-wrapper {
+      flex: 1;
+    }
+
     &__add-button {
       height: 52px;
       margin-top: 0;
+      width: 100%;
     }
   }
 }

@@ -7,25 +7,39 @@
     </div>
     } @else {
     @for(task of filteredTasks(); track task.id) {
-      <div class="task-list__item" [class.task-list__item--completed]="task.isCompleted">
-        <mat-checkbox [checked]="task.isCompleted" (change)="toggleTask(task.id)" class="task-list__checkbox">
-        </mat-checkbox>
-        @if (task.id !== editingTaskId()) {
-          <span class="task-list__text" [class.task-list__text--completed]="task.isCompleted" (click)="onTaskEditStarted(task.id, task.text)">
-          {{task.text}}
-        </span>
-        } @else {
-          <input title="task-list-input" type="text" class="task-list__input" [(ngModel)]="editedTaskText">
+    <div class="task-list__item" [class.task-list__item--completed]="task.isCompleted">
+      <mat-checkbox [checked]="task.isCompleted" (change)="toggleTask(task.id)" class="task-list__checkbox">
+      </mat-checkbox>
 
-          <button mat-icon-button (click)="saveEdit(task.id)">
+      @if (task.id !== editingTaskId()) {
+      <!-- VIEW MODE -->
+      <span class="task-list__text" [class.task-list__text--completed]="task.isCompleted"
+        (click)="onTaskEditStarted(task.id, task.text)">
+        {{task.text}}
+      </span>
+
+      <button type="button" (click)="onDelete(task.id)" class="task-list__delete-btn" title="Delete task">
+        <mat-icon>delete</mat-icon>
+      </button>
+      } @else {
+      <!-- EDIT MODE -->
+      <div class="task-list__edit-container">
+        <input title="task-list-input" type="text" class="task-list__edit-input" [(ngModel)]="editedTaskText"
+          (keydown.enter)="saveEdit(task.id)" (keydown.escape)="cancelEdit()" (blur)="saveEdit(task.id)" #editInput>
+
+        <div class="task-list__edit-actions">
+          <button type="button" class="task-list__edit-btn task-list__edit-btn--save" (click)="saveEdit(task.id)"
+            title="Save (Enter)">
             <mat-icon>check</mat-icon>
           </button>
-          <button mat-icon-button (click)="cancelEdit()">
+          <button type="button" class="task-list__edit-btn task-list__edit-btn--cancel" (click)="cancelEdit()"
+            title="Cancel (Escape)">
             <mat-icon>close</mat-icon>
           </button>
-        }
-        <button (click)="onDelete(task.id)" mat-icon-button><mat-icon>delete</mat-icon></button>
+        </div>
       </div>
+      }
+    </div>
     }
     }
   </div>

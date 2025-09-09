@@ -36,21 +36,21 @@
         display: flex;
         align-items: center;
         padding: 16px 12px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        transition: all 0.3s ease;
-        cursor: pointer;
         border-radius: 12px;
         margin-bottom: 8px;
         background: rgba(255, 255, 255, 0.02);
+        border: 1px solid transparent;
+        transition: all 0.3s ease;
+        gap: 12px;
 
         &:last-child {
-            border-bottom: none;
             margin-bottom: 0;
         }
 
         &:hover {
             background: rgba(255, 255, 255, 0.08);
-            transform: translateX(4px);
+            border-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-1px);
         }
 
         &--completed {
@@ -59,7 +59,7 @@
     }
 
     &__checkbox {
-        margin-right: 1rem;
+        flex-shrink: 0;
 
         // Checkbox styling for dark theme
         ::ng-deep .mat-mdc-checkbox {
@@ -79,13 +79,195 @@
         flex: 1;
         font-size: 16px;
         line-height: 1.6;
-        transition: all 0.3s ease;
         color: #ffffff;
         font-weight: 500;
+        cursor: pointer;
+        padding: 8px 0;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+
+        &:hover {
+            color: #64b5f6;
+        }
 
         &--completed {
             text-decoration: line-through;
             color: rgba(255, 255, 255, 0.5);
+        }
+    }
+
+    &__delete-btn {
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        color: rgba(255, 255, 255, 0.4);
+        opacity: 0;
+        transition: all 0.3s ease;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .mat-icon {
+            font-size: 20px;
+            width: 20px;
+            height: 20px;
+        }
+
+        &:hover {
+            color: #f44336;
+            background: rgba(244, 67, 54, 0.1);
+            transform: scale(1.1);
+        }
+    }
+
+    // Show delete button on item hover
+    &__item:hover &__delete-btn {
+        opacity: 1;
+    }
+
+    // Edit mode styles
+    &__edit-container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex: 1;
+    }
+
+    &__edit-input {
+        flex: 1;
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        padding: 8px 12px;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+
+        &:focus {
+            outline: none;
+            border-color: #64b5f6;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(100, 181, 246, 0.2);
+        }
+
+        &::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+    }
+
+    &__edit-actions {
+        display: flex;
+        gap: 4px;
+        flex-shrink: 0;
+    }
+
+    // Senior approach: Clean CSS with full control over pure HTML buttons
+    &__edit-btn {
+        // Perfect control without Material Design interference
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        padding: 0;
+        border: none;
+        border-radius: 8px;
+        background: transparent;
+        cursor: pointer;
+
+        // Perfect flexbox centering
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+        // Icon perfect alignment
+        .mat-icon {
+            font-size: 18px;
+            width: 18px;
+            height: 18px;
+            line-height: 1;
+            margin: 0;
+            display: block;
+        }
+
+        &--save {
+            color: #4caf50;
+
+            &:hover {
+                background: rgba(76, 175, 80, 0.15);
+                transform: scale(1.05);
+            }
+
+            &:active {
+                transform: scale(0.95);
+            }
+        }
+
+        &--cancel {
+            color: #f44336;
+
+            &:hover {
+                background: rgba(244, 67, 54, 0.15);
+                transform: scale(1.05);
+            }
+
+            &:active {
+                transform: scale(0.95);
+            }
+        }
+
+        // Focus states for accessibility
+        &:focus-visible {
+            outline: 2px solid rgba(255, 255, 255, 0.5);
+            outline-offset: 2px;
+        }
+    }
+
+    // Same clean treatment for delete button
+    &__delete-btn {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        padding: 0;
+        border: none;
+        border-radius: 8px;
+        background: transparent;
+        cursor: pointer;
+
+        // Perfect layout
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        flex-shrink: 0;
+        color: rgba(255, 255, 255, 0.4);
+        opacity: 0;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+        .mat-icon {
+            font-size: 20px;
+            width: 20px;
+            height: 20px;
+            line-height: 1;
+            margin: 0;
+            display: block;
+        }
+
+        &:hover {
+            color: #f44336;
+            background: rgba(244, 67, 54, 0.1);
+            transform: scale(1.05);
+        }
+
+        &:active {
+            transform: scale(0.95);
+        }
+
+        &:focus-visible {
+            outline: 2px solid rgba(255, 255, 255, 0.5);
+            outline-offset: 2px;
         }
     }
 }
@@ -95,10 +277,20 @@
     .task-list {
         &__item {
             padding: 14px 10px;
+            gap: 10px;
         }
 
         &__text {
             font-size: 15px;
+        }
+
+        &__delete-btn {
+            opacity: 1; // Always visible on mobile
+        }
+
+        &__edit-btn {
+            width: 32px;
+            height: 32px;
         }
     }
 }
