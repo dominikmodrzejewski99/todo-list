@@ -18,9 +18,12 @@
 
   <app-task-filters [currentFilter]="currentFilter()" (onFilterChange)="onFilterChange($event)"></app-task-filters>
 
-  <app-task-list [filteredTasks]="filteredTodos()" (taskDeleted)="deleteTask($event)" (taskToggled)="onTaskToggle($event)" (taskEditStarted)="onTaskEditStarted($event)" (taskEditSaved)="onTaskEditSaved($event)" [editingTaskId]="editingTaskId()" (taskEditCanceled)="onTaskEditCanceled()"></app-task-list>
-
-  <app-timer></app-timer>
-
-  <app-coffee-counter></app-coffee-counter>
+  <app-task-list [filteredTasks]="filteredTodos()" [editingTaskId]="editingTaskId()"
+    (taskToggled)="onTaskToggle($event)" (taskDeleted)="deleteTask($event)"
+    (taskEditStarted)="onTaskEditStarted($event)" (taskEditCanceled)="onTaskEditCanceled()"
+    (taskEditSaved)="onTaskEditSaved($event)"></app-task-list>
 </div>
+
+<!-- Floating Components -->
+<app-timer></app-timer>
+<app-coffee-counter></app-coffee-counter>

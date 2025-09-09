@@ -1,18 +1,21 @@
-import { Component, input, output } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
+import { Component, output, ChangeDetectionStrategy } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-coffee-counter-actions',
-  imports: [MatIconModule],
+  imports: [MatIcon],
   templateUrl: './coffee-counter-actions.component.html',
-  styleUrl: './coffee-counter-actions.component.scss'
+  styleUrl: './coffee-counter-actions.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CoffeeCounterActionsComponent {
 
-  addCoffee = output<void>();
-  removeCoffee = output<void>();
-  resetCoffee = output<void>();
+  // Clean event outputs
+  addCoffee = output();
+  removeCoffee = output();
+  resetCoffee = output();
 
+  // Event handlers
   onAddCoffee() {
     this.addCoffee.emit();
   }
@@ -24,5 +27,4 @@ export class CoffeeCounterActionsComponent {
   onResetCoffee() {
     this.resetCoffee.emit();
   }
-
 }

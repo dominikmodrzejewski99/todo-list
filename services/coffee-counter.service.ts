@@ -12,7 +12,7 @@ export class CoffeeCounterService {
   }
 
   removeCoffee() {
-    this.coffeeCounter.update(counter => counter - 1);
+    this.coffeeCounter.update(counter => Math.max(0, counter - 1));
   }
 
   resetCoffee() {

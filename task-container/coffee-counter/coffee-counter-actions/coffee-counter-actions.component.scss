@@ -1,0 +1,106 @@
+// Coffee Actions - Consistent with Design System
+.coffee-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    &__btn {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        min-width: 70px;
+
+        .mat-icon {
+            font-size: 18px;
+            width: 18px;
+            height: 18px;
+            margin: 0;
+        }
+
+        span {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        &:hover {
+            transform: translateY(-1px);
+        }
+
+        &:active {
+            transform: scale(0.98);
+        }
+
+        &:focus-visible {
+            outline: 2px solid rgba(255, 255, 255, 0.3);
+            outline-offset: 2px;
+        }
+
+        // Add Coffee Button
+        &--add {
+            background: rgba(74, 222, 128, 0.2);
+            color: #4ade80;
+            border: 1px solid rgba(74, 222, 128, 0.3);
+
+            &:hover {
+                background: rgba(74, 222, 128, 0.3);
+                box-shadow: 0 4px 12px rgba(74, 222, 128, 0.2);
+            }
+        }
+
+        // Remove Coffee Button  
+        &--remove {
+            background: rgba(248, 113, 113, 0.2);
+            color: #f87171;
+            border: 1px solid rgba(248, 113, 113, 0.3);
+
+            &:hover {
+                background: rgba(248, 113, 113, 0.3);
+                box-shadow: 0 4px 12px rgba(248, 113, 113, 0.2);
+            }
+        }
+
+        // Reset Button
+        &--reset {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.15);
+                color: #ffffff;
+                box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+            }
+        }
+    }
+}
+
+// Responsive
+@media (max-width: 768px) {
+    .coffee-actions {
+        gap: 8px;
+
+        &__btn {
+            padding: 8px 12px;
+            min-width: 60px;
+
+            .mat-icon {
+                font-size: 16px;
+                width: 16px;
+                height: 16px;
+            }
+
+            span {
+                font-size: 10px;
+            }
+        }
+    }
+}

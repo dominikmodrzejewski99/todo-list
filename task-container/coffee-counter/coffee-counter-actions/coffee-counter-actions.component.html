@@ -1,9 +1,19 @@
-<button mat-icon-button (click)="onAddCoffee()">
-    <mat-icon>add</mat-icon>
-</button>
-<button mat-icon-button (click)="onRemoveCoffee()">
-    <mat-icon>remove</mat-icon>
-</button>
-<button mat-icon-button (click)="onResetCoffee()">
-    <mat-icon>refresh</mat-icon>
-</button>
+<div class="coffee-actions">
+    <button type="button" class="coffee-actions__btn coffee-actions__btn--add" (click)="onAddCoffee()"
+        title="Had a coffee ☕">
+        <mat-icon>add</mat-icon>
+        <span>Had One</span>
+    </button>
+
+    <button type="button" class="coffee-actions__btn coffee-actions__btn--remove" (click)="onRemoveCoffee()"
+        title="Undo last coffee ↩️">
+        <mat-icon>remove</mat-icon>
+        <span>Undo</span>
+    </button>
+
+    <button type="button" class="coffee-actions__btn coffee-actions__btn--reset" (click)="onResetCoffee()"
+        title="Reset counter 🔄">
+        <mat-icon>refresh</mat-icon>
+        <span>Reset</span>
+    </button>
+</div>

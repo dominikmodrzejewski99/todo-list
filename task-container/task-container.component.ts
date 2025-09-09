@@ -10,7 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { TaskFormComponent } from './task-form/task-form.component';
 import { TaskFiltersComponent } from './task-filters/task-filters.component';
 import { TaskListComponent } from './task-list/task-list.component';
-import {TimerComponent} from './timer/timer.component';
+import { TimerComponent } from './timer/timer.component';
 import { CoffeeCounterComponent } from './coffee-counter/coffee-counter.component';
 
 @Component({
@@ -63,7 +63,7 @@ export class TaskContainerComponent {
     this.tasksListService.setEditingId(taskId);
   }
 
-  onTaskEditSaved(task: {id: number, text: string}) {
+  onTaskEditSaved(task: { id: number, text: string }) {
     this.tasksListService.saveTask(task.id, task.text);
   }
 

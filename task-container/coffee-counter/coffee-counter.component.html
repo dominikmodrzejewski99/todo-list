@@ -1,4 +1,31 @@
-<div>
-    <app-coffee-counter-actions (addCoffee)="addCoffee()" (removeCoffee)="removeCoffee()" (resetCoffee)="resetCoffee()"></app-coffee-counter-actions>
-    <p>Coffee Counter: {{ coffeeCounter() }}</p>
+<div class="coffee-counter">
+    <div class="coffee-counter__container">
+        <div class="coffee-counter__header">
+            <mat-icon class="coffee-counter__icon">local_cafe</mat-icon>
+            <h3 class="coffee-counter__title">Coffee Counter</h3>
+        </div>
+
+        <div class="coffee-counter__content">
+            <div class="coffee-counter__display">
+                <div class="coffee-counter__count">
+                    <span class="coffee-counter__number">{{ coffeeCounter() }}</span>
+                    <span class="coffee-counter__label">coffees today</span>
+                </div>
+            </div>
+
+            <div class="coffee-counter__visual">
+                <div class="coffee-counter__progress-bar">
+                    <div class="coffee-counter__progress-bar-fill" [style.width.%]="getFillPercentage()">
+                    </div>
+                </div>
+                <span class="coffee-counter__progress-text">{{ getFillPercentage() | number:'1.0-0' }}%</span>
+            </div>
+        </div>
+
+        <div class="coffee-counter__actions">
+            <app-coffee-counter-actions (addCoffee)="addCoffee()" (removeCoffee)="removeCoffee()"
+                (resetCoffee)="resetCoffee()">
+            </app-coffee-counter-actions>
+        </div>
+    </div>
 </div>
