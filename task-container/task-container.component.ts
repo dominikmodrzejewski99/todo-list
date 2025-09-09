@@ -11,6 +11,7 @@ import { TaskFormComponent } from './task-form/task-form.component';
 import { TaskFiltersComponent } from './task-filters/task-filters.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import {TimerComponent} from './timer/timer.component';
+import { CoffeeCounterComponent } from './coffee-counter/coffee-counter.component';
 
 @Component({
   selector: 'app-task-container',
@@ -25,7 +26,8 @@ import {TimerComponent} from './timer/timer.component';
     TaskFormComponent,
     TaskListComponent,
     TaskFiltersComponent,
-    TimerComponent
+    TimerComponent,
+    CoffeeCounterComponent
   ],
   templateUrl: './task-container.component.html',
   styleUrl: './task-container.component.scss'
