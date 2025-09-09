@@ -1,23 +1,24 @@
-import { computed, Injectable, signal, WritableSignal } from '@angular/core';
-
-export interface Task {
-  id: number,
-  text: string,
-  isCompleted: boolean,
-}
-
-export type FilterType = 'all' | 'active' | 'completed';
+import { computed, Injectable, signal, WritableSignal, inject, effect } from '@angular/core';
+import { LocalStorageService } from './local-storage.service';
+import { Task } from '../models/task.interface';
+import { FilterType } from '../models/filter-type';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TasksListService {
 
-  todosList: WritableSignal<Task[]> = signal([{
-    id: 1,
-    text: 'Example task',
-    isCompleted: false
-  }])
+  private localStorageService = inject(LocalStorageService);
+  private readonly STORAGE_KEY = 'todo_tasks';
+
+  // Load tasks from localStorage or use default
+  todosList: WritableSignal<Task[]> = signal(
+    this.localStorageService.loadData<Task[]>(this.STORAGE_KEY, [{
+      id: 1,
+      text: 'Example task',
+      isCompleted: false
+    }])
+  );
 
   newTaskText = signal('');
   filter = signal<FilterType>('all');
@@ -93,5 +94,12 @@ export class TasksListService {
       })
     })
   }
-  constructor() { }
+
+  constructor() {
+    // Auto-save tasks to localStorage whenever todosList changes
+    effect(() => {
+      const tasks = this.todosList();
+      this.localStorageService.saveData(this.STORAGE_KEY, tasks);
+    });
+  }
 }

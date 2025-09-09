@@ -1,8 +1,8 @@
 import { Component, input, output, inject, signal, ChangeDetectionStrategy, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { MatCheckbox } from "@angular/material/checkbox";
 import { MatIcon } from '@angular/material/icon';
-import { Task, TasksListService } from '../../services/tasks-list.service';
-import { FormsModule } from "@angular/forms";
+import { FormsModule } from '@angular/forms';
+import { Task } from '../../models/task.interface';
 
 @Component({
   selector: 'app-task-list',

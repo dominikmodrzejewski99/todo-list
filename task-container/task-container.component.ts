@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { TasksListService, FilterType } from '../services/tasks-list.service';
+import { TasksListService } from '../services/tasks-list.service';
+import { FilterType } from '../models/filter-type';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
