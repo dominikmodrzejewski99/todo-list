@@ -36,6 +36,7 @@ export class TaskContainerComponent {
   newTaskText = this.tasksListService.newTaskText;
   filteredTodos = this.tasksListService.filteredTodos;
   currentFilter = this.tasksListService.filter;
+  editingTaskId = this.tasksListService.editingId;
 
   addTask() {
     if (this.newTaskText().trim()) {
@@ -54,5 +55,17 @@ export class TaskContainerComponent {
 
   onFilterChange(filter: string) {
     this.tasksListService.changeFilter(filter as FilterType);
+  }
+
+  onTaskEditStarted(taskId: number) {
+    this.tasksListService.setEditingId(taskId);
+  }
+
+  onTaskEditSaved(task: {id: number, text: string}) {
+    this.tasksListService.saveTask(task.id, task.text);
+  }
+
+  onTaskEditCanceled() {
+    this.tasksListService.cancelEdit();
   }
 }

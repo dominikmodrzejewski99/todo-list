@@ -67,7 +67,20 @@ export class TasksListService {
     });
   }
 
+  saveTask(id: number, newText: string) {
+    this.updateTaskText(id, newText);
+    this.setEditingId(null);
+  }
+
+  cancelEdit() {
+    this.setEditingId(null);
+  }
+
   editingId = signal<number | null>(null)
+
+  setEditingId(id: number | null) {
+    this.editingId.set(id);
+  }
 
   updateTaskText(id: number, newText: string) {
     this.todosList.update(tasks => {
