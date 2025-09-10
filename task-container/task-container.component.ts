@@ -43,7 +43,7 @@ export class TaskContainerComponent {
   currentFilter = this.tasksListService.filter;
   editingTaskId = this.tasksListService.editingId;
 
-  tasksStats = this.tasksListService.tasksStats();
+  tasksStats = this.tasksListService.tasksStats;
 
   addTask() {
     if (this.newTaskText().trim()) {

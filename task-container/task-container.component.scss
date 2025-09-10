@@ -1,6 +1,6 @@
 // Task Container Component - BEM Convention
 .task-container {
-  max-width: 900px;
+  max-width: 1400px; // Increased for sidebar layout
   margin: 0 auto;
   padding: 30px 20px;
   min-height: 100vh;
@@ -37,6 +37,49 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     letter-spacing: 0.5px;
+  }
+
+  // Main Grid Layout
+  &__main-grid {
+    display: grid;
+    gap: 24px;
+    align-items: start;
+
+    // Mobile First - Single Column (sidebar on top)
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "sidebar"
+      "main";
+
+    // Tablet and up - Two columns (sidebar left, main right)
+    @media (min-width: 768px) {
+      grid-template-columns: 350px 1fr;
+      grid-template-areas: "sidebar main";
+      gap: 32px;
+    }
+
+    // Desktop - Wider sidebar for better stats display
+    @media (min-width: 1200px) {
+      grid-template-columns: 380px 1fr;
+      gap: 40px;
+    }
+  }
+
+  &__sidebar {
+    grid-area: sidebar;
+    position: sticky;
+    top: 20px; // Stick to top when scrolling
+
+    // On mobile, not sticky
+    @media (max-width: 767px) {
+      position: static;
+      margin-bottom: 20px;
+    }
+  }
+
+  &__main-content {
+    grid-area: main;
+    min-width: 0; // Prevent grid overflow
   }
 
   &__form-section {
@@ -88,7 +131,10 @@
   }
 }
 
-// Responsive design
+// ===============================================
+// Responsive Design
+// ===============================================
+
 @media (max-width: 768px) {
   .task-container {
     padding: 20px 15px;
@@ -107,6 +153,10 @@
 
     &__header-title {
       font-size: 1.5rem;
+    }
+
+    &__main-grid {
+      gap: 20px;
     }
 
     &__form {
@@ -139,5 +189,9 @@
   .task-container {
     padding-bottom: 160px; // More space for stacked timer buttons
     padding-right: 10px;
+
+    &__main-grid {
+      gap: 16px;
+    }
   }
 }

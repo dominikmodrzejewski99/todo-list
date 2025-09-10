@@ -4,27 +4,37 @@
     <h1 class="task-container__header-title">Todo List</h1>
   </div>
 
-  <div class="task-container__form-section">
-    <div class="task-container__form">
-      <div class="task-container__input-wrapper">
-        <app-task-form [(taskText)]="newTaskText"></app-task-form>
+  <!-- Main Content Grid -->
+  <div class="task-container__main-grid">
+    <!-- Left Sidebar - Task Stats -->
+    <aside class="task-container__sidebar" role="complementary">
+      <app-task-stats [stats]="tasksStats()"></app-task-stats>
+    </aside>
+
+    <!-- Right Content - Main Features -->
+    <main class="task-container__main-content" role="main">
+      <div class="task-container__form-section">
+        <div class="task-container__form">
+          <div class="task-container__input-wrapper">
+            <app-task-form [(taskText)]="newTaskText"></app-task-form>
+          </div>
+          <button mat-raised-button color="primary" (click)="addTask()" class="task-container__add-button">
+            <mat-icon>add</mat-icon>
+            Add Task
+          </button>
+        </div>
       </div>
-      <button mat-raised-button color="primary" (click)="addTask()" class="task-container__add-button">
-        <mat-icon>add</mat-icon>
-        Add Task
-      </button>
-    </div>
+
+      <app-task-filters [currentFilter]="currentFilter()" (onFilterChange)="onFilterChange($event)"></app-task-filters>
+
+      <app-task-list [filteredTasks]="filteredTodos()" [editingTaskId]="editingTaskId()"
+        (taskToggled)="onTaskToggle($event)" (taskDeleted)="deleteTask($event)"
+        (taskEditStarted)="onTaskEditStarted($event)" (taskEditCanceled)="onTaskEditCanceled()"
+        (taskEditSaved)="onTaskEditSaved($event)"></app-task-list>
+    </main>
   </div>
-
-  <app-task-filters [currentFilter]="currentFilter()" (onFilterChange)="onFilterChange($event)"></app-task-filters>
-
-  <app-task-list [filteredTasks]="filteredTodos()" [editingTaskId]="editingTaskId()"
-    (taskToggled)="onTaskToggle($event)" (taskDeleted)="deleteTask($event)"
-    (taskEditStarted)="onTaskEditStarted($event)" (taskEditCanceled)="onTaskEditCanceled()"
-    (taskEditSaved)="onTaskEditSaved($event)"></app-task-list>
 </div>
 
 <!-- Floating Components -->
 <app-timer></app-timer>
 <app-coffee-counter></app-coffee-counter>
-<app-task-stats [stats]="tasksStats"></app-task-stats>

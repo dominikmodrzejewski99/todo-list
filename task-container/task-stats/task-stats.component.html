@@ -1,2 +1,97 @@
-<p>task-stats works!</p>
-{{stats()}}
+<section class="task-stats" role="complementary" aria-labelledby="task-stats-title">
+    <header class="task-stats__header">
+        <h2 id="task-stats-title" class="task-stats__title">
+            <mat-icon class="task-stats__title-icon" aria-hidden="true">analytics</mat-icon>
+            Task Analytics
+        </h2>
+    </header>
+
+    <div class="task-stats__content">
+        <div class="task-stats__grid">
+
+            <!-- Total Tasks Card -->
+            <mat-card class="task-stats__card task-stats__card--primary">
+                <mat-card-content class="task-stats__card-content">
+                    <div class="task-stats__metric">
+                        <mat-icon class="task-stats__metric-icon" aria-hidden="true">assignment</mat-icon>
+                        <div class="task-stats__metric-data">
+                            <span class="task-stats__metric-value"
+                                [attr.aria-label]="'Total tasks: ' + (stats()?.total || 0)">
+                                {{ stats()?.total || 0 }}
+                            </span>
+                            <span class="task-stats__metric-label">Total Tasks</span>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+
+            <!-- Completed Tasks Card -->
+            <mat-card class="task-stats__card task-stats__card--success">
+                <mat-card-content class="task-stats__card-content">
+                    <div class="task-stats__metric">
+                        <mat-icon class="task-stats__metric-icon" aria-hidden="true">check_circle</mat-icon>
+                        <div class="task-stats__metric-data">
+                            <span class="task-stats__metric-value"
+                                [attr.aria-label]="'Completed tasks: ' + (stats()?.completed || 0)">
+                                {{ stats()?.completed || 0 }}
+                            </span>
+                            <span class="task-stats__metric-label">Completed</span>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+
+            <!-- Pending Tasks Card -->
+            <mat-card class="task-stats__card task-stats__card--warning">
+                <mat-card-content class="task-stats__card-content">
+                    <div class="task-stats__metric">
+                        <mat-icon class="task-stats__metric-icon" aria-hidden="true">pending</mat-icon>
+                        <div class="task-stats__metric-data">
+                            <span class="task-stats__metric-value"
+                                [attr.aria-label]="'Pending tasks: ' + (stats()?.pending || 0)">
+                                {{ stats()?.pending || 0 }}
+                            </span>
+                            <span class="task-stats__metric-label">Pending</span>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+
+            <!-- Completion Rate Card with Progress Bar -->
+            <mat-card class="task-stats__card task-stats__card--accent">
+                <mat-card-content class="task-stats__card-content">
+                    <div class="task-stats__metric task-stats__metric--with-progress">
+                        <mat-icon class="task-stats__metric-icon" aria-hidden="true">trending_up</mat-icon>
+                        <div class="task-stats__metric-data">
+                            <span class="task-stats__metric-value"
+                                [attr.aria-label]="'Completion rate: ' + ((stats()?.completionRate || 0) * 100 | number:'1.0-1') + ' percent'">
+                                {{ (stats()?.completionRate || 0) * 100 | number:'1.0-1' }}%
+                            </span>
+                            <span class="task-stats__metric-label">Completion Rate</span>
+                            <mat-progress-bar class="task-stats__progress-bar"
+                                [value]="(stats()?.completionRate || 0) * 100" mode="determinate"
+                                [attr.aria-label]="'Progress: ' + ((stats()?.completionRate || 0) * 100 | number:'1.0-1') + ' percent completed'">
+                            </mat-progress-bar>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+
+            <!-- Filtered Count Card -->
+            <mat-card class="task-stats__card task-stats__card--info">
+                <mat-card-content class="task-stats__card-content">
+                    <div class="task-stats__metric">
+                        <mat-icon class="task-stats__metric-icon" aria-hidden="true">filter_list</mat-icon>
+                        <div class="task-stats__metric-data">
+                            <span class="task-stats__metric-value"
+                                [attr.aria-label]="'Filtered tasks: ' + (stats()?.filteredCount || 0)">
+                                {{ stats()?.filteredCount || 0 }}
+                            </span>
+                            <span class="task-stats__metric-label">Filtered View</span>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</section>
