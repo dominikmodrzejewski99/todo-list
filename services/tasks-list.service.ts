@@ -1,4 +1,4 @@
-import { computed, Injectable, signal, WritableSignal, inject, effect } from '@angular/core';
+import { computed, Injectable, signal, WritableSignal, inject, effect, linkedSignal } from '@angular/core';
 import { LocalStorageService } from './local-storage.service';
 import { Task } from '../models/task.interface';
 import { FilterType } from '../models/filter-type';
@@ -19,6 +19,24 @@ export class TasksListService {
       isCompleted: false
     }])
   );
+
+  tasksStats = linkedSignal(() => {
+    const tasks = this.todosList();
+    const totalTasks = tasks.length;
+    const completedTasks = tasks.filter(task => task.isCompleted);
+    const pendingTasks = tasks.filter(task => !task.isCompleted);
+    const completionRate = totalTasks > 0 ? completedTasks.length / totalTasks : 0;
+    const filteredCount = this.filteredTodos().length;
+
+    return {
+      total: totalTasks,
+      completed: completedTasks.length,
+      pending: pendingTasks.length,
+      completionRate: completionRate,
+      filteredCount: filteredCount
+    }
+
+  })
 
   newTaskText = signal('');
   filter = signal<FilterType>('all');
@@ -96,7 +114,6 @@ export class TasksListService {
   }
 
   constructor() {
-    // Auto-save tasks to localStorage whenever todosList changes
     effect(() => {
       const tasks = this.todosList();
       this.localStorageService.saveData(this.STORAGE_KEY, tasks);

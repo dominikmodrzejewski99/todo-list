@@ -13,6 +13,7 @@ import { TaskFiltersComponent } from './task-filters/task-filters.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { TimerComponent } from './timer/timer.component';
 import { CoffeeCounterComponent } from './coffee-counter/coffee-counter.component';
+import { TaskStatsComponent } from './task-stats/task-stats.component';
 
 @Component({
   selector: 'app-task-container',
@@ -28,7 +29,8 @@ import { CoffeeCounterComponent } from './coffee-counter/coffee-counter.componen
     TaskListComponent,
     TaskFiltersComponent,
     TimerComponent,
-    CoffeeCounterComponent
+    CoffeeCounterComponent,
+    TaskStatsComponent
   ],
   templateUrl: './task-container.component.html',
   styleUrl: './task-container.component.scss'
@@ -40,6 +42,8 @@ export class TaskContainerComponent {
   filteredTodos = this.tasksListService.filteredTodos;
   currentFilter = this.tasksListService.filter;
   editingTaskId = this.tasksListService.editingId;
+
+  tasksStats = this.tasksListService.tasksStats();
 
   addTask() {
     if (this.newTaskText().trim()) {
