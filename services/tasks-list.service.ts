@@ -1,6 +1,6 @@
 import { computed, Injectable, signal, WritableSignal, inject, effect, linkedSignal } from '@angular/core';
 import { LocalStorageService } from './local-storage.service';
-import { Task } from '../models/task.model';
+import { Task, Priority } from '../models/task.model';
 import { FilterType } from '../models/filter-type';
 
 @Injectable({
@@ -16,7 +16,8 @@ export class TasksListService {
     this.localStorageService.loadData<Task[]>(this.STORAGE_KEY, [{
       id: 1,
       text: 'Example task',
-      isCompleted: false
+      isCompleted: false,
+      priority: Priority.NONE
     }])
   );
 
@@ -64,7 +65,8 @@ export class TasksListService {
     this.todosList.update(tasks => [...tasks, {
       id: Math.max(1, ...tasks.map(task => task.id)) + 1,
       text: newTaskText,
-      isCompleted: false
+      isCompleted: false,
+      priority: Priority.NONE
     }])
   }
 

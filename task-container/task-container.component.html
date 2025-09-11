@@ -30,7 +30,9 @@
       <app-task-list [filteredTasks]="filteredTodos()" [editingTaskId]="editingTaskId()"
         (taskToggled)="onTaskToggle($event)" (taskDeleted)="deleteTask($event)"
         (taskEditStarted)="onTaskEditStarted($event)" (taskEditCanceled)="onTaskEditCanceled()"
-        (taskEditSaved)="onTaskEditSaved($event)"></app-task-list>
+        (taskEditSaved)="onTaskEditSaved($event)"
+        (taskPriority)="onTaskPriorityChanged($event)"
+        ></app-task-list>
     </main>
   </div>
 </div>

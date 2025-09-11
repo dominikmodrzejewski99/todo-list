@@ -14,6 +14,9 @@ import { TaskListComponent } from './task-list/task-list.component';
 import { TimerComponent } from './timer/timer.component';
 import { CoffeeCounterComponent } from './coffee-counter/coffee-counter.component';
 import { TaskStatsComponent } from './task-stats/task-stats.component';
+import { TaskManagerFacade } from '../facades/task-manager.facade';
+import { Priority } from '../models/task.model';
+import { TaskPriorityComponent } from './task-priority/task-priority.component';
 
 @Component({
   selector: 'app-task-container',
@@ -36,14 +39,17 @@ import { TaskStatsComponent } from './task-stats/task-stats.component';
   styleUrl: './task-container.component.scss'
 })
 export class TaskContainerComponent {
-  tasksListService: TasksListService = inject(TasksListService);
+  private tasksListService: TasksListService = inject(TasksListService);
+
+  private taskManagerFacade: TaskManagerFacade = inject(TaskManagerFacade);
 
   newTaskText = this.tasksListService.newTaskText;
   filteredTodos = this.tasksListService.filteredTodos;
   currentFilter = this.tasksListService.filter;
   editingTaskId = this.tasksListService.editingId;
-
   tasksStats = this.tasksListService.tasksStats;
+
+
 
   addTask() {
     if (this.newTaskText().trim()) {
@@ -75,4 +81,9 @@ export class TaskContainerComponent {
   onTaskEditCanceled() {
     this.tasksListService.cancelEdit();
   }
+
+  onTaskPriorityChanged(event: { taskId: number, priority: Priority }) {
+    this.taskManagerFacade.updateTaskPriority(event.taskId, event.priority);
+  }
+
 }

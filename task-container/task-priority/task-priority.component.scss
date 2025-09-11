@@ -1,0 +1,179 @@
+@use 'sass:map';
+
+// Priority colors configuration
+$priority-colors: (
+    high: (base: #ef4444,
+        background: rgba(239, 68, 68, 0.1),
+        border: rgba(239, 68, 68, 0.3),
+        shadow: rgba(239, 68, 68, 0.4)),
+    medium: (base: #f59e0b,
+        background: rgba(245, 158, 11, 0.1),
+        border: rgba(245, 158, 11, 0.3),
+        shadow: rgba(245, 158, 11, 0.4)),
+    low: (base: #10b981,
+        background: rgba(16, 185, 129, 0.1),
+        border: rgba(16, 185, 129, 0.3),
+        shadow: rgba(16, 185, 129, 0.4)),
+    none: (base: #9ca3af,
+        background: rgba(156, 163, 175, 0.1),
+        border: rgba(156, 163, 175, 0.3),
+        shadow: rgba(156, 163, 175, 0.4))
+);
+
+// Mixin for priority button styling
+@mixin priority-button-variant($color-map) {
+    background: map.get($color-map, background);
+    color: map.get($color-map, base);
+    border: 1px solid map.get($color-map, border);
+
+    &:hover:not(.task-priority__button--active) {
+        background: map.get($color-map, background);
+        opacity: 0.8;
+    }
+
+    &.task-priority__button--active {
+        background: map.get($color-map, base);
+        color: white;
+        box-shadow: 0 2px 8px map.get($color-map, shadow);
+    }
+}
+
+// BEM Block
+.task-priority {
+
+    // BEM Element: buttons container
+    &__buttons {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    // BEM Element: individual button
+    &__button {
+
+        // Use higher specificity than Material without !important
+        &.mat-mdc-button {
+            border-radius: 20px;
+            padding: 8px 16px;
+            min-width: auto;
+            height: 36px;
+            font-size: 12px;
+            line-height: 1.2;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            text-transform: none;
+            letter-spacing: 0.02em;
+
+            // Button content layout
+            .mat-button-wrapper,
+            .mdc-button__label {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 4px;
+            }
+
+            // BEM Modifier: active state
+            &--active {
+                transform: translateY(-1px);
+            }
+
+            // Hover state for non-active buttons
+            &:hover:not(&--active) {
+                transform: translateY(-1px);
+            }
+
+            // Focus state
+            &:focus {
+                outline: 2px solid rgba(66, 165, 245, 0.5);
+                outline-offset: 2px;
+            }
+
+            // Disabled state
+            &:disabled {
+                opacity: 0.6;
+                cursor: not-allowed;
+                transform: none;
+            }
+        }
+
+        // BEM Element: icon within button
+        &__icon {
+            font-size: 16px;
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
+        }
+
+        // BEM Element: text within button
+        &__text {
+            font-weight: 500;
+            font-size: 12px;
+        }
+
+        // BEM Modifiers: priority variants using the mixin
+        &--high {
+            @include priority-button-variant(map.get($priority-colors, high));
+        }
+
+        &--medium {
+            @include priority-button-variant(map.get($priority-colors, medium));
+        }
+
+        &--low {
+            @include priority-button-variant(map.get($priority-colors, low));
+        }
+
+        &--none {
+            @include priority-button-variant(map.get($priority-colors, none));
+        }
+    }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+    .task-priority {
+        &__buttons {
+            gap: 6px;
+        }
+
+        &__button {
+            &.mat-mdc-button {
+                padding: 6px 12px;
+                height: 32px;
+                font-size: 11px;
+            }
+
+            &__icon {
+                font-size: 14px;
+                width: 14px;
+                height: 14px;
+            }
+
+            &__text {
+                font-size: 11px;
+            }
+        }
+    }
+}
+
+// Animation for smooth state transitions
+@keyframes priority-change {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+// Apply animation when priority changes
+.task-priority__button--changing {
+    animation: priority-change 0.3s ease-in-out;
+}

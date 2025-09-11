@@ -2,14 +2,16 @@ import { Component, input, output, inject, signal, ChangeDetectionStrategy, View
 import { MatCheckbox } from "@angular/material/checkbox";
 import { MatIcon } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
-import { Task } from '../../models/task.model';
+import { Priority, Task } from '../../models/task.model';
+import { TaskPriorityComponent } from '../task-priority/task-priority.component';
 
 @Component({
   selector: 'app-task-list',
   imports: [
     MatCheckbox,
     MatIcon,
-    FormsModule
+    FormsModule,
+    TaskPriorityComponent
   ],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss',
@@ -24,6 +26,7 @@ export class TaskListComponent implements AfterViewChecked {
   taskEditStarted = output<number>();
   taskEditSaved = output<{ id: number, text: string }>();
   taskEditCanceled = output<void>();
+  taskPriority = output<{ taskId: number, priority: Priority }>();
 
   editedTaskText = signal<string>('');
 
@@ -44,6 +47,10 @@ export class TaskListComponent implements AfterViewChecked {
 
   onDelete(id: number) {
     this.taskDeleted.emit(id);
+  }
+
+  onChangePriority(event: { taskId: number, priority: Priority }) {
+    this.taskPriority.emit(event);
   }
 
   onTaskEditStarted(id: number, text: string) {

@@ -1,0 +1,17 @@
+<div class="task-priority">
+    <div class="task-priority__buttons">
+        @for(priority of priorities(); track priority) {
+        <button mat-button [class]="getButtonClasses(priority)" (click)="changePriority(priority)"
+            [attr.aria-label]="'Set priority to ' + getPriorityLabel(priority)"
+            [attr.aria-pressed]="currentPriority() === priority">
+
+            <mat-icon class="task-priority__button__icon">
+                {{ getPriorityIcon(priority) }}
+            </mat-icon>
+            <span class="task-priority__button__text">
+                {{ getPriorityLabel(priority) }}
+            </span>
+        </button>
+        }
+    </div>
+</div>

@@ -18,6 +18,13 @@
         {{task.text}}
       </span>
 
+      <!-- PRIORITY SELECTOR -->
+      <app-task-priority 
+        [taskId]="task.id"
+        [currentPriority]="task.priority || 'none'"
+        (priorityChanged)="onChangePriority($event)">
+      </app-task-priority>
+
       <button type="button" (click)="onDelete(task.id)" class="task-list__delete-btn" title="Delete task">
         <mat-icon>delete</mat-icon>
       </button>
