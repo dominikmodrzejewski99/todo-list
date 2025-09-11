@@ -2,7 +2,7 @@ import { Component, input, output, inject, signal, ChangeDetectionStrategy, View
 import { MatCheckbox } from "@angular/material/checkbox";
 import { MatIcon } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
-import { Task } from '../../models/task.interface';
+import { Task } from '../../models/task.model';
 
 @Component({
   selector: 'app-task-list',

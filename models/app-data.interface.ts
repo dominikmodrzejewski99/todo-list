@@ -1,4 +1,4 @@
-import { Task } from './task.interface';
+import { Task } from './task.model';
 
 export interface AppData {
     tasks: Task[];

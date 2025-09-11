@@ -1,6 +1,6 @@
 import { computed, Injectable, signal, WritableSignal, inject, effect, linkedSignal } from '@angular/core';
 import { LocalStorageService } from './local-storage.service';
-import { Task } from '../models/task.interface';
+import { Task } from '../models/task.model';
 import { FilterType } from '../models/filter-type';
 
 @Injectable({
