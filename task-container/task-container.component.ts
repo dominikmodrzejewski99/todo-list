@@ -53,17 +53,17 @@ export class TaskContainerComponent {
 
   addTask() {
     if (this.newTaskText().trim()) {
-      this.tasksListService.addTask(this.newTaskText());
+      this.taskManagerFacade.addTask(this.newTaskText());
       this.newTaskText.set('');
     }
   }
 
   deleteTask(taskId: number) {
-    this.tasksListService.deleteTask(taskId);
+    this.taskManagerFacade.deleteTask(taskId);
   }
 
   onTaskToggle(taskId: number) {
-    this.tasksListService.toggleTask(taskId);
+    this.taskManagerFacade.toggleTask(taskId);
   }
 
   onFilterChange(filter: string) {
@@ -75,7 +75,8 @@ export class TaskContainerComponent {
   }
 
   onTaskEditSaved(task: { id: number, text: string }) {
-    this.tasksListService.saveTask(task.id, task.text);
+    this.taskManagerFacade.updateTaskText(task.id, task.text);
+    this.tasksListService.setEditingId(null);
   }
 
   onTaskEditCanceled() {
