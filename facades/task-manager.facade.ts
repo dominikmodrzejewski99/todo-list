@@ -11,7 +11,6 @@ import { Priority } from '../models/task.model';
 export class TaskManagerFacade {
 
   private taskListService = inject(TasksListService);
-  private priorityService = inject(PriorityService);
   private websocketService = inject(WebsocketService);
 
   constructor() {
@@ -81,7 +80,7 @@ export class TaskManagerFacade {
     // Send to other clients
     this.websocketService.sendTaskMessage(
       this.websocketService.createTaskMessage('TASK_PRIORITY_CHANGED', taskId, {
-        priority: priority.toString()
+        priority: priority
       })
     );
   }
@@ -129,7 +128,9 @@ export class TaskManagerFacade {
 
       case 'TASK_PRIORITY_CHANGED':
         if (message.taskData?.priority) {
-          const priority = Priority[message.taskData.priority as keyof typeof Priority];
+          const priority = message.taskData.priority;
+
+
           this.taskListService.todosList.update(tasks =>
             tasks.map(task => task.id === message.taskId
               ? { ...task, priority }

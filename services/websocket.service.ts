@@ -1,6 +1,6 @@
 import { DestroyRef, inject, Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, EMPTY, retry, timer, tap, Observable, filter } from 'rxjs';
-import { ConnectionState, TaskSyncMessage } from '../models/websocket.model';
+import { BehaviorSubject, catchError, EMPTY, retry, timer, tap, Observable, Subject, filter } from 'rxjs';
+import { CoffeeMessage, ConnectionState, TaskSyncMessage, WebSocketMessage } from '../models/websocket.model';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -11,10 +11,13 @@ export class WebsocketService {
 
   private readonly RETRY_ATTEMPTS = 5;
   private readonly RETRY_DELAY = 1000;
-  private readonly DEFAULT_WS_URL = 'ws://localhost:7779';
+  private readonly DEFAULT_WS_URL = 'ws://localhost:2137';
 
   private destroyRef = inject(DestroyRef);
-  private websocket$?: WebSocketSubject<TaskSyncMessage>;
+  public websocket$?: WebSocketSubject<WebSocketMessage>;
+
+  // Stable stream of all incoming messages regardless of connection timing
+  private incomingMessages$ = new Subject<WebSocketMessage>();
 
   connectionState$ = new BehaviorSubject<ConnectionState>(ConnectionState.disconnected);
 
@@ -58,7 +61,7 @@ export class WebsocketService {
       }
     });
 
-    // 📡 Subscribe to messages and handle connection
+    // 📡 Subscribe to messages and forward to stable subject
     this.websocket$.pipe(
       this.getRetryConfig(),
       tap((message) => {
@@ -70,7 +73,9 @@ export class WebsocketService {
         return EMPTY;
       }),
       takeUntilDestroyed(this.destroyRef)
-    ).subscribe();
+    ).subscribe((message) => {
+      this.incomingMessages$.next(message as WebSocketMessage);
+    });
   }
 
   // 📤 Send task sync message to server
@@ -83,9 +88,44 @@ export class WebsocketService {
     }
   }
 
-  // 📨 Get task messages observable (filtered for task sync only)
-  getTaskMessages(): Observable<TaskSyncMessage> {
-    return this.websocket$ || EMPTY;
+  // 📨 Get task messages observable (all messages)
+  getTaskMessages(): Observable<WebSocketMessage> {
+    return this.incomingMessages$.asObservable();
+  }
+
+  getCoffeeMessages(): Observable<CoffeeMessage> {
+    return this.incomingMessages$.pipe(
+      filter((msg): msg is CoffeeMessage => (msg as any)?.type === 'COFFEE_COUNTER_CHANGED')
+    );
+  }
+
+  // 📤 Send coffee message to server
+  sendCoffeeMessage(coffeeCount: number): void {
+    if (this.connectionState$.value === ConnectionState.connected && this.websocket$) {
+      const message: CoffeeMessage = this.createCoffeeMessage(coffeeCount);
+      console.log('📤 Sent coffee message:', message);
+      this.websocket$.next(message);
+    } else {
+      console.warn('⚠️ Cannot send coffee message - WebSocket not connected');
+    }
+  }
+
+  // 🛠️ Helper method to create task messages
+  createTaskMessage(type: TaskSyncMessage['type'], taskId: number, taskData?: TaskSyncMessage['taskData']): TaskSyncMessage {
+    return {
+      type,
+      taskId,
+      taskData,
+      timestamp: Date.now()
+    };
+  }
+
+  createCoffeeMessage(coffeeCount: number): CoffeeMessage {
+    return {
+      type: 'COFFEE_COUNTER_CHANGED',
+      coffeeCount,
+      timestamp: Date.now()
+    }
   }
 
   // 🔌 Disconnect from server
@@ -104,15 +144,5 @@ export class WebsocketService {
     setTimeout(() => {
       this.startConnection(url);
     }, 1000);
-  }
-
-  // 🛠️ Helper method to create task messages
-  createTaskMessage(type: TaskSyncMessage['type'], taskId: number, taskData?: TaskSyncMessage['taskData']): TaskSyncMessage {
-    return {
-      type,
-      taskId,
-      taskData,
-      timestamp: Date.now()
-    };
   }
 }

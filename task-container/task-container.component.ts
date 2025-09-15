@@ -49,8 +49,6 @@ export class TaskContainerComponent {
   editingTaskId = this.tasksListService.editingId;
   tasksStats = this.tasksListService.tasksStats;
 
-
-
   addTask() {
     if (this.newTaskText().trim()) {
       this.taskManagerFacade.addTask(this.newTaskText());
