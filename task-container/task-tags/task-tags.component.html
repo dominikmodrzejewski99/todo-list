@@ -1,0 +1,19 @@
+<div class="tags" role="group" aria-label="Task tags">
+    <div class="tags__list" role="list">
+        @for (t of (tags() || []); track t) {
+        <button type="button" class="tags__chip" role="listitem" (click)="remove(t)"
+            [attr.aria-label]="'Remove tag ' + t">
+            <span class="tags__chip-text">{{ t }}</span>
+            <span class="tags__chip-x" aria-hidden="true">×</span>
+        </button>
+        }
+    </div>
+
+    <div class="tags__controls">
+        <input class="tags__input" type="text" [value]="newTag()" (input)="newTag.set($any($event.target).value)"
+            (keydown.enter)="add()" (keydown)="onKeydown($event)" placeholder="Add tag" aria-label="Add tag" />
+        <button type="button" class="tags__add-btn" (click)="add()" aria-label="Add tag">Add</button>
+    </div>
+
+    <div class="visually-hidden" aria-live="polite">{{ liveMessage() }}</div>
+</div>

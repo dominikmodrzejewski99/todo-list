@@ -1,8 +1,10 @@
 .app-container {
     min-height: 100vh;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    background: var(--app-background);
+    color: var(--text-primary);
     padding: 0;
     margin: 0;
+    transition: background-color 240ms ease, color 240ms ease;
 }
 
 :host {

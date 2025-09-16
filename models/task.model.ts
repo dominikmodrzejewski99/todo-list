@@ -9,5 +9,6 @@ export interface Task {
   id: number,
   text: string,
   isCompleted: boolean,
-  priority: Priority
+  priority: Priority,
+  tags?: string[]
 }

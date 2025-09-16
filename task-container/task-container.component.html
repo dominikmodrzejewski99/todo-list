@@ -2,6 +2,8 @@
   <div class="task-container__header">
     <mat-icon class="task-container__header-icon">checklist</mat-icon>
     <h1 class="task-container__header-title">Todo List</h1>
+    <div class="task-container__spacer"></div>
+    <app-theme-toggle></app-theme-toggle>
   </div>
 
   <!-- Main Content Grid -->
@@ -30,9 +32,7 @@
       <app-task-list [filteredTasks]="filteredTodos()" [editingTaskId]="editingTaskId()"
         (taskToggled)="onTaskToggle($event)" (taskDeleted)="deleteTask($event)"
         (taskEditStarted)="onTaskEditStarted($event)" (taskEditCanceled)="onTaskEditCanceled()"
-        (taskEditSaved)="onTaskEditSaved($event)"
-        (taskPriority)="onTaskPriorityChanged($event)"
-        ></app-task-list>
+        (taskEditSaved)="onTaskEditSaved($event)" (taskPriority)="onTaskPriorityChanged($event)" (tagAdded)="onTaskTagAdd($event.taskId, $event.tag)" (tagRemoved)="onTaskTagRemove($event.taskId, $event.tag)"></app-task-list>
     </main>
   </div>
 </div>

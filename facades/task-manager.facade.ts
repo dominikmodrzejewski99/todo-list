@@ -85,6 +85,52 @@ export class TaskManagerFacade {
     );
   }
 
+  addTag(taskId: number, tag: string): void {
+    const t = tag.trim().toLowerCase();
+    if (!t) return;
+
+    this.taskListService.todosList.update(list =>
+      list.map(task =>
+        task.id !== taskId
+          ? task
+          : (task.tags ?? []).includes(t)
+            ? task
+            : { ...task, tags: [...(task.tags ?? []), t] }
+      )
+    );
+  }
+
+  removeTag(taskId: number, tag: string): void {
+    const t = tag.trim().toLowerCase();
+    if (!t) return;
+
+    this.taskListService.todosList.update(list =>
+      list.map(task =>
+        task.id !== taskId
+          ? task
+          : { ...task, tags: (task.tags ?? []).filter(x => x !== t) }
+      )
+    );
+  }
+
+  updateTag(taskId: number, oldTag: string, newTag: string): void {
+    const o = oldTag.trim().toLowerCase();
+    const n = newTag.trim().toLowerCase();
+    if (!n || n === o) return;
+
+    this.taskListService.todosList.update(list =>
+      list.map(task => {
+        if (task.id !== taskId) return task;
+
+        const next = Array.from(new Set(
+          (task.tags ?? []).map(t => (t.trim().toLowerCase() === o ? n : t.trim().toLowerCase()))
+        ));
+
+        return { ...task, tags: next };
+      })
+    );
+  }
+
   private handleIncomingTaskMessage(message: any): void {
     console.log('📨 Received task message:', message);
 
@@ -95,7 +141,8 @@ export class TaskManagerFacade {
             id: message.taskId,
             text: message.taskData.text,
             isCompleted: false,
-            priority: Priority.NONE
+            priority: Priority.NONE,
+            tags: []
           }]);
         }
         break;

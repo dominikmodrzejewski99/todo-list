@@ -9,12 +9,12 @@
 
     max-width: 320px;
     min-width: 280px;
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--surface-elev-2);
     -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid var(--border-color);
     border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-elev-2);
 
     &__container {
         padding: 24px;
@@ -35,7 +35,7 @@
     }
 
     &__title {
-        color: #ffffff;
+        color: var(--text-primary);
         font-size: 1.1rem;
         font-weight: 600;
         margin: 0;
@@ -72,7 +72,7 @@
 
     &__label {
         font-size: 0.85rem;
-        color: rgba(255, 255, 255, 0.7);
+        color: color-mix(in oklch, var(--text-primary), transparent 30%);
         font-weight: 500;
     }
 
@@ -86,7 +86,7 @@
     &__progress-bar {
         width: 100px;
         height: 6px;
-        background: rgba(255, 255, 255, 0.1);
+        background: color-mix(in oklch, var(--text-primary), transparent 85%);
         border-radius: 3px;
         overflow: hidden;
         position: relative;
@@ -102,7 +102,7 @@
 
     &__progress-text {
         font-size: 0.75rem;
-        color: rgba(255, 255, 255, 0.6);
+        color: color-mix(in oklch, var(--text-primary), transparent 40%);
         font-weight: 500;
         text-align: right;
     }

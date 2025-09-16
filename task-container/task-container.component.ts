@@ -17,6 +17,8 @@ import { TaskStatsComponent } from './task-stats/task-stats.component';
 import { TaskManagerFacade } from '../facades/task-manager.facade';
 import { Priority } from '../models/task.model';
 import { TaskPriorityComponent } from './task-priority/task-priority.component';
+import { ThemeToggleComponent } from './theme-toggle/theme-toggle.component';
+import { TaskTagsComponent } from "./task-tags/task-tags.component";
 
 @Component({
   selector: 'app-task-container',
@@ -33,14 +35,14 @@ import { TaskPriorityComponent } from './task-priority/task-priority.component';
     TaskFiltersComponent,
     TimerComponent,
     CoffeeCounterComponent,
-    TaskStatsComponent
-  ],
+    TaskStatsComponent,
+    ThemeToggleComponent
+],
   templateUrl: './task-container.component.html',
   styleUrl: './task-container.component.scss'
 })
 export class TaskContainerComponent {
   private tasksListService: TasksListService = inject(TasksListService);
-
   private taskManagerFacade: TaskManagerFacade = inject(TaskManagerFacade);
 
   newTaskText = this.tasksListService.newTaskText;
@@ -84,5 +86,17 @@ export class TaskContainerComponent {
   onTaskPriorityChanged(event: { taskId: number, priority: Priority }) {
     this.taskManagerFacade.updateTaskPriority(event.taskId, event.priority);
   }
+
+  onTaskTagAdd(taskId: number, tag: string) {
+    this.taskManagerFacade.addTag(taskId, tag);
+  }
+
+  onTaskTagRemove(taskId: number, tag: string) {
+    this.taskManagerFacade.removeTag(taskId, tag);
+  }
+
+  // onTaskTagUpdate(taskId: number, oldTag: string, newTag: string) {
+  //   this.tasksListService.updateTag(taskId, oldTag, newTag);
+  // }
 
 }

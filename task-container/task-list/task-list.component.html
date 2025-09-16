@@ -19,11 +19,13 @@
       </span>
 
       <!-- PRIORITY SELECTOR -->
-      <app-task-priority 
-        [taskId]="task.id"
-        [currentPriority]="task.priority || 'none'"
+      <app-task-priority [taskId]="task.id" [currentPriority]="task.priority || 'none'"
         (priorityChanged)="onChangePriority($event)">
       </app-task-priority>
+
+      <app-task-tags [tags]="task.tags || []" (tagAdded)="onTaskTagAdd(task.id, $event)"
+        (tagRemoved)="onTaskTagRemove(task.id, $event)">
+      </app-task-tags>
 
       <button type="button" (click)="onDelete(task.id)" class="task-list__delete-btn" title="Delete task">
         <mat-icon>delete</mat-icon>

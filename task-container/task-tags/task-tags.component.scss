@@ -1,0 +1,95 @@
+.tags {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        min-height: 32px; // stabilize height so layout doesn't jump when first chip appears
+    }
+
+    &__chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 8px;
+        border-radius: 999px;
+        border: 1px solid var(--border-color);
+        background: var(--surface-elev-1);
+        color: var(--text-primary);
+        cursor: pointer;
+        transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease, box-shadow 120ms ease;
+
+        &:hover {
+            background: var(--surface-elev-2);
+        }
+
+        &:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px color-mix(in oklch, #64b5f6, transparent 60%);
+        }
+    }
+
+    &__chip-text {
+        line-height: 1;
+    }
+
+    &__chip-x {
+        font-weight: 700;
+        line-height: 1;
+    }
+
+    &__controls {
+        display: inline-flex;
+        gap: 6px;
+        align-items: center;
+    }
+
+    &__input {
+        padding: 6px 10px;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        background: var(--surface-elev-1);
+        color: var(--text-primary);
+        min-width: 140px;
+        transition: box-shadow 120ms ease, border-color 120ms ease;
+
+        &:focus-visible {
+            outline: none;
+            border-color: #64b5f6;
+            box-shadow: 0 0 0 3px color-mix(in oklch, #64b5f6, transparent 70%);
+        }
+    }
+
+    &__add-btn {
+        padding: 6px 10px;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        background: var(--surface-elev-1);
+        color: var(--text-primary);
+        cursor: pointer;
+        transition: box-shadow 120ms ease, background-color 120ms ease, border-color 120ms ease;
+
+        &:hover {
+            background: var(--surface-elev-2);
+        }
+
+        &:focus-visible {
+            outline: none;
+            border-color: #64b5f6;
+            box-shadow: 0 0 0 3px color-mix(in oklch, #64b5f6, transparent 70%);
+        }
+    }
+}
+
+.visually-hidden {
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
+}

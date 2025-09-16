@@ -2,6 +2,7 @@ import { computed, Injectable, signal, WritableSignal, inject, effect, linkedSig
 import { LocalStorageService } from './local-storage.service';
 import { Task, Priority } from '../models/task.model';
 import { FilterType } from '../models/filter-type';
+import { TaskManagerFacade } from '../facades/task-manager.facade';
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +12,13 @@ export class TasksListService {
   private localStorageService = inject(LocalStorageService);
   private readonly STORAGE_KEY = 'todo_tasks';
 
-  // Load tasks from localStorage or use default
   todosList: WritableSignal<Task[]> = signal(
     this.localStorageService.loadData<Task[]>(this.STORAGE_KEY, [{
       id: 1,
       text: 'Example task',
       isCompleted: false,
-      priority: Priority.NONE
+      priority: Priority.NONE,
+      tags: []
     }])
   );
 
@@ -41,6 +42,8 @@ export class TasksListService {
 
   newTaskText = signal('');
   filter = signal<FilterType>('all');
+
+
 
   filteredTodos = computed(() => {
     const currentFilter = this.filter();
@@ -66,7 +69,8 @@ export class TasksListService {
       id: Math.max(1, ...tasks.map(task => task.id)) + 1,
       text: newTaskText,
       isCompleted: false,
-      priority: Priority.NONE
+      priority: Priority.NONE,
+      tags: []
     }])
   }
 

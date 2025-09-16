@@ -40,3 +40,60 @@ body {
         background: rgba(255, 255, 255, 0.3);
     }
 }
+
+/* ===============================================
+   Theme Variables and Smooth Transitions
+   =============================================== */
+:root {
+    /* Default to dark to match current styling to avoid flash */
+    --text-primary: #ffffff;
+    --border-color: rgba(0, 0, 0, 0.2);
+    --surface-elev-1: rgba(255, 255, 255, 0.06);
+    --surface-elev-2: rgba(255, 255, 255, 0.1);
+    --app-background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    --scrollbar-track: rgba(255, 255, 255, 0.05);
+    --scrollbar-thumb: rgba(255, 255, 255, 0.2);
+    --shadow-elev-1: 0 6px 16px rgba(0, 0, 0, 0.15);
+    --shadow-elev-2: 0 10px 24px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] {
+    --text-primary: #ffffff;
+    --border-color: rgba(255, 255, 255, 0.15);
+    --surface-elev-1: rgba(255, 255, 255, 0.06);
+    --surface-elev-2: rgba(255, 255, 255, 0.12);
+    --app-background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    --scrollbar-track: rgba(255, 255, 255, 0.05);
+    --scrollbar-thumb: rgba(255, 255, 255, 0.2);
+    --shadow-elev-1: 0 8px 20px rgba(0, 0, 0, 0.3);
+    --shadow-elev-2: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="light"] {
+    --text-primary: #0a0d14;
+    --border-color: rgba(12, 18, 28, 0.22);
+    --surface-elev-1: rgba(10, 13, 20, 0.035);
+    --surface-elev-2: rgba(10, 13, 20, 0.08);
+    --app-background: linear-gradient(135deg, #ffffff 0%, #f2f5fb 50%, #e6ecf7 100%);
+    --scrollbar-track: rgba(10, 13, 20, 0.06);
+    --scrollbar-thumb: rgba(10, 13, 20, 0.2);
+    --shadow-elev-1: 0 6px 16px rgba(12, 18, 28, 0.12);
+    --shadow-elev-2: 0 12px 28px rgba(12, 18, 28, 0.16);
+}
+
+/* Apply variables and transitions */
+body,
+.app-container {
+    background: var(--app-background);
+    color: var(--text-primary);
+    transition: background-color 240ms ease, color 240ms ease, border-color 240ms ease, box-shadow 240ms ease;
+}
+
+/* Scrollbar uses theme variables */
+::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+}

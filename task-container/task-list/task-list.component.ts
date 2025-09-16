@@ -4,6 +4,8 @@ import { MatIcon } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { Priority, Task } from '../../models/task.model';
 import { TaskPriorityComponent } from '../task-priority/task-priority.component';
+import { TaskManagerFacade } from '../../facades/task-manager.facade';
+import { TaskTagsComponent } from "../task-tags/task-tags.component";
 
 @Component({
   selector: 'app-task-list',
@@ -11,13 +13,17 @@ import { TaskPriorityComponent } from '../task-priority/task-priority.component'
     MatCheckbox,
     MatIcon,
     FormsModule,
-    TaskPriorityComponent
-  ],
+    TaskPriorityComponent,
+    TaskTagsComponent
+],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskListComponent implements AfterViewChecked {
+
+  private taskManager = inject(TaskManagerFacade);
+
   filteredTasks = input.required<Task[]>();
   editingTaskId = input.required<number | null>();
 
@@ -27,6 +33,8 @@ export class TaskListComponent implements AfterViewChecked {
   taskEditSaved = output<{ id: number, text: string }>();
   taskEditCanceled = output<void>();
   taskPriority = output<{ taskId: number, priority: Priority }>();
+  tagAdded = output<{ taskId: number, tag: string }>();
+  tagRemoved = output<{ taskId: number, tag: string }>();
 
   editedTaskText = signal<string>('');
 
@@ -47,6 +55,13 @@ export class TaskListComponent implements AfterViewChecked {
 
   onDelete(id: number) {
     this.taskDeleted.emit(id);
+  }
+
+  onTaskTagAdd(taskId: number, tag: string) {
+    this.tagAdded.emit({ taskId, tag });
+  }
+  onTaskTagRemove(taskId: number, tag: string) {
+    this.tagRemoved.emit({ taskId, tag });
   }
 
   onChangePriority(event: { taskId: number, priority: Priority }) {

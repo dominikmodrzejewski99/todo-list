@@ -1,0 +1,5 @@
+<button type="button" class="theme-toggle" (click)="toggle()"
+    [attr.aria-label]="'Switch to ' + (mode() === 'dark' ? 'light' : 'dark') + ' mode'">
+    <mat-icon class="theme-toggle__icon">{{ icon() }}</mat-icon>
+    <span class="theme-toggle__label">{{ label() }} mode</span>
+</button>
