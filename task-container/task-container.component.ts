@@ -19,6 +19,8 @@ import { Priority } from '../models/task.model';
 import { TaskPriorityComponent } from './task-priority/task-priority.component';
 import { ThemeToggleComponent } from './theme-toggle/theme-toggle.component';
 import { TaskTagsComponent } from "./task-tags/task-tags.component";
+import { WeatherService } from '../weather.service';
+import { WeatherChartComponent } from "./weather-chart/weather-chart.component";
 
 @Component({
   selector: 'app-task-container',
@@ -36,7 +38,8 @@ import { TaskTagsComponent } from "./task-tags/task-tags.component";
     TimerComponent,
     CoffeeCounterComponent,
     TaskStatsComponent,
-    ThemeToggleComponent
+    ThemeToggleComponent,
+    WeatherChartComponent
 ],
   templateUrl: './task-container.component.html',
   styleUrl: './task-container.component.scss'
@@ -44,12 +47,14 @@ import { TaskTagsComponent } from "./task-tags/task-tags.component";
 export class TaskContainerComponent {
   private tasksListService: TasksListService = inject(TasksListService);
   private taskManagerFacade: TaskManagerFacade = inject(TaskManagerFacade);
+  private weatherService: WeatherService = inject(WeatherService);
 
   newTaskText = this.tasksListService.newTaskText;
   filteredTodos = this.tasksListService.filteredTodos;
   currentFilter = this.tasksListService.filter;
   editingTaskId = this.tasksListService.editingId;
   tasksStats = this.tasksListService.tasksStats;
+  weatherData = this.weatherService.weatherData
 
   addTask() {
     if (this.newTaskText().trim()) {
@@ -94,9 +99,10 @@ export class TaskContainerComponent {
   onTaskTagRemove(taskId: number, tag: string) {
     this.taskManagerFacade.removeTag(taskId, tag);
   }
-
   // onTaskTagUpdate(taskId: number, oldTag: string, newTag: string) {
   //   this.tasksListService.updateTag(taskId, oldTag, newTag);
   // }
+
+ 
 
 }

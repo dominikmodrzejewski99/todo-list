@@ -15,6 +15,7 @@ export class TaskTagsComponent {
 
   newTag = signal<string>('');
   liveMessage = signal<string>('');
+  title = signal<string>('Add');
 
   add(): void {
     const t = this.newTag().trim();

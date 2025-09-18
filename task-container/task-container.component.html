@@ -1,7 +1,7 @@
 <div class="task-container">
   <div class="task-container__header">
     <mat-icon class="task-container__header-icon">checklist</mat-icon>
-    <h1 class="task-container__header-title">Todo List</h1>
+    <h1 class="task-container__header-title">Dashboard</h1>
     <div class="task-container__spacer"></div>
     <app-theme-toggle></app-theme-toggle>
   </div>
@@ -40,3 +40,4 @@
 <!-- Floating Components -->
 <app-timer></app-timer>
 <app-coffee-counter></app-coffee-counter>
+<app-weather-chart chartType="bar" [data]="weatherData()"></app-weather-chart>

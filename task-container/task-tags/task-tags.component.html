@@ -12,7 +12,7 @@
     <div class="tags__controls">
         <input class="tags__input" type="text" [value]="newTag()" (input)="newTag.set($any($event.target).value)"
             (keydown.enter)="add()" (keydown)="onKeydown($event)" placeholder="Add tag" aria-label="Add tag" />
-        <button type="button" class="tags__add-btn" (click)="add()" aria-label="Add tag">Add</button>
+        <button type="button" class="tags__add-btn" (click)="add()" aria-label="Add tag">{{title()}}</button>
     </div>
 
     <div class="visually-hidden" aria-live="polite">{{ liveMessage() }}</div>
